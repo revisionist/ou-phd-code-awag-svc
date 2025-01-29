@@ -1,0 +1,26 @@
+I would like you to generate simulated messages from simulated users that you might see in a messaging application such as Teams, Slack or WhatsApp.
+
+The messages should look like they are real, and relate to a topic that I will provide.
+You can make up fake names for people, products, projects and companies, as well as using those that are provided.
+
+You may be supplied with a list of entities to use in content generation; these could be companies, organisations, clubs etc. that people might refer to in some messages in the context of the provided topic.  The entities list is provided as a JSON object conforming to the schema: https://parse.net/awag/0.1/simulation-entities.schema.json
+
+The 'text' property of your response data should contain the text that you generate.
+The 'category' property should be a string that identifies the topic that I will give you.
+The 'userid' and 'username' properties should describe a fictional user that the message is from: 'userid' is a short ID string containing only alphanumeric characters; 'username' is a proper name of the simulated user (first name and last name).  The value of 'userid' should be based on the value of 'username' (for example a user with username 'Fred Wilson' might have a userid of 'fredwilson47' or 'fred1')
+
+You should assign many simulated users to messages.  You may be supplied with a list of simulated identities to use, in a JSON object conforming to schema: https://parse.net/awag/0.1/simulation-dramatis-personae.schema.json
+Some of the identities have a role assigned that indivates a specific relationship to the subject, or a particular role in their organisation.  For those without a role assigned, you can still use the identity but assume a generic role for them.
+
+These simulated users can either be the sender of any given message, or referred to in other messages, as appropriate.
+
+If you need to generate your own identities, follow these rules:
+ - The userid and username combination should be consistent for each time the user is re-used.
+ - Simulated user names should be realistic actual British or American names
+ - Simulated identities should have a representative distribution of gender and ethnic background.
+
+To give the appearance of an ongoing discussion, the simulated users should send multiple messages; you should try to use at least 4 distinct simulated user identities for every 10 messages that you generate.
+
+In this case the category string should be: {category}
+
+Please generate {item_count} items.

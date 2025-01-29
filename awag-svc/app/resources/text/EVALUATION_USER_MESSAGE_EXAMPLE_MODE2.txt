@@ -1,0 +1,95 @@
+Here are some examples to help you understand how to respond.  This is an example request:
+
+    {
+       "id":{
+          "itemId":"214ea6fa-874d-44ae-a931-6561e69cedff",
+          "perspectiveId":"classification",
+          "classificationId":"work-pers"
+       },
+       "content":"2024-04-06T08:49:20.791998\nWho's going to the pub after work today?",
+       "classification":{
+          "description":"Does this item relate to my work or personal life?",
+          "classifiedAs":"work",
+          "fromAvailableClassifications":[
+             "work",
+             "personal"
+          ]
+       }
+    }
+
+In this case, the content that the classification is for is: "Who's going to the pub after work today?".  The classification that this request relates to is "Does this item relate to my work or personal life?", which has two available classifications: 'work' and 'personal'.  The system that you are evaluating has classified this as 'work'.  In this case, even though the content mentions work, the topic is socialising outside of work, so the better classification would be 'personal'.  The appropriate response to this request would therefor look like:
+
+    {
+       "id":{
+          "itemId":"214ea6fa-874d-44ae-a931-6561e69cedff",
+          "perspectiveId":"classification",
+          "classificationId":"work-pers"
+       },
+       "evaluatedSelection":"work",
+       "evaluationLikert":2,
+       "evaluationText":"This message is about going to the pub after work, which mentions work but is generally a personal topic. Therefore, I mostly disagree with the classification of 'work' - I would have chosen 'personal' instead on balance.  I have awarded an evaluationLikert value of 2 to indicate disagreement."
+    }
+
+Here is a second example:
+
+    {
+       "id":{
+          "itemId":"2e308a00-36b0-44f5-ab47-b2af74e87dd5",
+          "perspectiveId":"classification",
+          "classificationId":"work-pers"
+       },
+       "content":"2024-04-06T10:51:32.783943\nCan someone help me with this report? I'm really struggling.",
+       "classification":{
+          "description":"Does this item relate to my work or personal life?",
+          "classifiedAs":"personal",
+          "fromAvailableClassifications":[
+             "work",
+             "personal"
+          ]
+       }
+    }
+
+This request is for the same work-personal classification, but in this case the content is more clearly work related.  However, the classifiedAs that you are evaluating is 'personal' - so the system clearly got it wrong.  Therefore the appropriate response is:
+
+    {
+       "id":{
+          "itemId":"2e308a00-36b0-44f5-ab47-b2af74e87dd5",
+          "perspectiveId":"classification",
+          "classificationId":"work-pers"
+       },
+       "evaluatedSelection":"personal",
+       "evaluationLikert":1,
+       "evaluationText":"I strongly disagree with the selected classification of 'personal' for this item. The request for help with a report seems very much a work-specific task so I would instead have selected 'work'.  I have given an evaluationLikert value of 1 to indicate strong disagreement."
+    }
+
+Consider the same content, but imagine that the system had classified it differently:
+
+    {
+       "id":{
+          "itemId":"2e308a00-36b0-44f5-ab47-b2af74e87dd5",
+          "perspectiveId":"classification",
+          "classificationId":"work-pers"
+       },
+       "content":"2024-04-06T10:51:32.783943\nCan someone help me with this report? I'm really struggling.",
+       "classification":{
+          "description":"Does this item relate to my work or personal life?",
+          "classifiedAs":"work",
+          "fromAvailableClassifications":[
+             "work",
+             "personal"
+          ]
+       }
+    }
+
+In this case the system got it right, so your response should be:
+
+    {
+       "id":{
+          "itemId":"2e308a00-36b0-44f5-ab47-b2af74e87dd5",
+          "perspectiveId":"classification",
+          "classificationId":"work-pers"
+       },
+       "evaluatedSelection":"work",
+       "evaluationLikert":5,
+       "evaluationText": "I strongly agree with the selected classification of 'work' for this item - the request for help with a report seems very much a work-specific task.  I have given an evaluationLikert value of 5 to indicate strong agreement."
+    }

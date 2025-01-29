@@ -1,0 +1,69 @@
+{
+   "$id":"https://parse.net/awag/0.1/classification-evaluation-result.mode2.schema.json",
+   "$schema":"https://json-schema.org/draft/2020-12/schema",
+   "name":"get_evaluations",
+   "description":"Return a set of evaluations of the provided input data",
+   "parameters":{
+      "type":"object",
+      "properties":{
+         "resultItems":{
+            "type":"array",
+            "items":{
+               "type":"object",
+               "title":"Evaluation Result",
+               "description":"Object containing the evaluation result for a given item",
+               "properties":{
+                  "id":{
+                     "type":"object",
+                     "properties":{
+                        "itemId":{
+                           "type":"string",
+                           "description":"The ID of the item being evaluated"
+                        },
+                        "perspectiveId":{
+                           "type":"string",
+                           "description":"The ID of the perspective that this evaluation is for"
+                        },
+                        "classificationId":{
+                           "type":"string",
+                           "description":"The ID of the classification that this evaluation is for"
+                        }
+                     },
+                     "required":[
+                        "itemId",
+                        "perspectiveId",
+                        "classificationId"
+                     ]
+                  },
+                  "evaluatedSelection":{
+                     "title":"Evaluated Classification Selection",
+                     "description":"The classification selection chosen by the system, that the evaluation has been applied to",
+                     "type":"string"
+                  },
+                  "evaluationLikert":{
+                     "type":"integer",
+                     "minimum":1,
+                     "maximum":5,
+                     "title":"Evaluation Likert Scale Value",
+                     "description":"A likert scale ranging from 1 (not at all in agreement with the item classification) to 5 (absolutely in agreement). Values must only be in the range 1-5"
+                  },
+                  "evaluationText":{
+                     "type":"string",
+                     "title":"Evaluation Text",
+                     "description":"Textual description elaborating on why the evaluationLikert value was chosen for this item"
+                  }
+               },
+               "required":[
+                  "id",
+                  "evaluatedSelection",
+                  "evaluationLikert",
+                  "evaluationText"
+               ]
+            }
+         }
+      },
+      "required":[
+         "resultItems"
+      ]
+   }
+}

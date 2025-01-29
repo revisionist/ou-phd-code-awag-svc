@@ -1,0 +1,170 @@
+{
+   "$id":"https://parse.net/awag/0.1/classification-evaluation-request.alt.schema.json",
+   "$schema":"https://json-schema.org/draft/2020-12/schema",
+   "type":"object",
+   "title":"Evaluation Request",
+   "description":"Object representing a request to evaluate one or more items in the role of the specified persona from the supplied perspectives",
+   "properties":{
+      "persona":{
+         "title":"Evaluation Persona",
+         "description":"The persona to adopt when performing the evaluation",
+         "type":"object",
+         "properties":{
+            "name":{
+               "title":"Persona Name",
+               "description":"The name given to this persona",
+               "type":"string"
+            },
+            "id":{
+               "title":"Persona ID",
+               "description":"The internal ID for this persona (ignore)",
+               "type":"string"
+            },
+            "definition":{
+               "title":"Evaluation Persona Definition",
+               "description":"The definition of this persona",
+               "type":"object",
+               "properties":{
+                  "type":{
+                     "title":"Persona Type",
+                     "description":"Internal identifier of the persona type (ignore)",
+                     "type":"string"
+                  },
+                  "age":{
+                     "title":"Age",
+                     "description":"The age of the persona",
+                     "type":"integer"
+                  },
+                  "gender":{
+                     "title":"Gender",
+                     "description":"What gender does this persona identify as",
+                     "type":"string"
+                  },
+                  "does":{
+                     "title":"Does",
+                     "description":"What does this persona do in their work and personal life",
+                     "type":"string"
+                  },
+                  "feelThinkBelieve":{
+                     "title":"Feel/Think/Believe",
+                     "description":"What does this persona feel, think and believe; what is their outlook on life, priorities etc",
+                     "type":"string"
+                  },
+                  "technologyExperience":{
+                     "title":"Technology Experience",
+                     "description":"What experience does this persona have with technology",
+                     "type":"string"
+                  },
+                  "problems":{
+                     "title":"Problems",
+                     "description":"What problems does this persona encounter",
+                     "type":"string"
+                  },
+                  "needs":{
+                     "title":"Needs",
+                     "description":"What needs does this persona have",
+                     "type":"string"
+                  },
+                  "existingSolutions":{
+                     "title":"Existing Solutions",
+                     "description":"What solutions does this persona currently employ to address their problems and meet their needs",
+                     "type":"string"
+                  }
+               }
+            }
+         },
+         "required":[
+            "id",
+            "name",
+            "definition"
+         ]
+      },
+      "perspective":{
+         "title":"Perspective",
+         "description":"The perspective defines a way that the item should be evaluated - the persona should consider the evaluation from the angle defined by the perspective",
+         "type":"string"
+      },
+      "items":{
+         "title":"Items",
+         "description":"An array of items to be evaluated",
+         "type":"array",
+         "items":{
+            "type":"object",
+            "properties":{
+               "id":{
+                  "title":"Item Identification",
+                  "description":"Unique identifiers for the item and classification",
+                  "type":"object",
+                  "properties":{
+                     "item_id":{
+                        "title":"Item ID",
+                        "description":"The ID of the item being evaluated",
+                        "type":"string"
+                     },
+                     "perspective_id":{
+                        "title":"Perspective ID",
+                        "description":"A string identifying the perspective",
+                        "type":"string"
+                     },
+                     "classification_id":{
+                        "title":"Classification ID",
+                        "description":"Identifier for the specific classification being evaluated",
+                        "type":"string"
+                     }
+                  },
+                  "required":[
+                     "item_id",
+                     "perspective_id",
+                     "classification_id"
+                  ]
+               },
+               "content":{
+                  "title":"Content",
+                  "description":"The content of the item being evaluated",
+                  "type":"string"
+               },
+               "classification":{
+                  "title":"Classification",
+                  "description":"Details of the classification that was applied to the item",
+                  "type":"object",
+                  "properties":{
+                     "description":{
+                        "title":"Description",
+                        "description":"Explanation of the classification's criteria",
+                        "type":"string"
+                     },
+                     "classified_as":{
+                        "title":"Classified As",
+                        "description":"This is the value that must be evaluated.  It is the classification value that the source system has chosen for the item from the list of available classifications.  Note that a value of 'none', 'not' or null is a special case that does not need to be in the list of available classifications; these would mean that the system decided to classify the item as not being relevant for this classification, which should also be taken into consideration in the evaluation",
+                        "type":"string"
+                     },
+                     "from_available_classifications":{
+                        "title":"Available Classifications",
+                        "description":"The classification values that were available to the system to apply to this classification for this item",
+                        "type":"array",
+                        "items":{
+                           "type":"string"
+                        }
+                     }
+                  },
+                  "required":[
+                     "description",
+                     "classified_as",
+                     "from_available_classifications"
+                  ]
+               }
+            },
+            "required":[
+               "id",
+               "content",
+               "classification"
+            ]
+         }
+      }
+   },
+   "required":[
+      "persona",
+      "perspective",
+      "items"
+   ]
+}

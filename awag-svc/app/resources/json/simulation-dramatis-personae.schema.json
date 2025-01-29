@@ -1,0 +1,62 @@
+{
+   "$id":"https://parse.net/awag/0.1/simulation-dramatis-personae.schema.json",
+   "$schema":"https://json-schema.org/draft/2020-12/schema",
+   "type":"array",
+   "title":"Dramatis Personae List",
+   "items":[
+      {
+         "type":"object",
+         "title":"Group",
+         "description":"Collection of identities that are linked in some way",
+         "properties":{
+            "name":{
+               "type":"string",
+               "description":"The name of this group of identities"
+            },
+            "description":{
+               "type":"string",
+               "description":"Description of the contents of this group; use this value to determine how and when to represent/use them"
+            },
+            "members":{
+               "type":"array",
+               "description":"The list of identities in this group",
+               "items":[
+                  {
+                     "type":"object",
+                     "title":"Identity",
+                     "description":"An individual identity",
+                     "properties":{
+                        "surname":{
+                           "type":"string",
+                           "description":"The surname of family name of this identity"
+                        },
+                        "firstname":{
+                           "type":"string",
+                           "description":"The first name of this identity"
+                        },
+                        "userid":{
+                           "type":"string",
+                           "description":"A computer or application username to use for this identity"
+                        },
+                        "role":{
+                           "type":"string",
+                           "description":"The role of this identity within the group, and/or the relationship that the identity has to the principle character"
+                        }
+                     },
+                     "required":[
+                        "surname",
+                        "firstname",
+                        "userid"
+                     ]
+                  }
+               ]
+            }
+         },
+         "required":[
+            "name",
+            "description",
+            "members"
+         ]
+      }
+   ]
+}

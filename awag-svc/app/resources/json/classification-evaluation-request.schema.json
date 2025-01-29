@@ -1,0 +1,245 @@
+{
+   "$id":"https://parse.net/awag/0.1/classification-evaluation-request.schema.json",
+   "$schema":"https://json-schema.org/draft/2020-12/schema",
+   "type":"object",
+   "title":"Evaluation Request",
+   "description":"Object representing a request to evaluate one or more items in the role of the specified persona from the supplied perspectives",
+   "properties":{
+      "persona":{
+         "title":"Evaluation Persona",
+         "description":"The persona to adopt when performing the evaluation",
+         "type":"object",
+         "properties":{
+            "name":{
+               "title":"Persona Name",
+               "description":"The name given to this persona",
+               "type":"string"
+            },
+            "id":{
+               "title":"Persona ID",
+               "description":"The internal ID for this persona (ignore)",
+               "type":"string"
+            },
+            "definition":{
+               "title":"Evaluation Persona Definition",
+               "description":"The definition of this persona",
+               "type":"object",
+               "properties":{
+                  "type":{
+                     "title":"Persona Type",
+                     "description":"Internal identifier of the persona type (ignore)",
+                     "type":"string"
+                  },
+                  "age":{
+                     "title":"Age",
+                     "description":"The age of the persona",
+                     "type":"integer"
+                  },
+                  "gender":{
+                     "title":"Gender",
+                     "description":"What gender does this persona identify as",
+                     "type":"string"
+                  },
+                  "does":{
+                     "title":"Does",
+                     "description":"What does this persona do in their work and personal life",
+                     "type":"string"
+                  },
+                  "feelThinkBelieve":{
+                     "title":"Feel/Think/Believe",
+                     "description":"What does this persona feel, think and believe; what is their outlook on life, priorities etc",
+                     "type":"string"
+                  },
+                  "technologyExperience":{
+                     "title":"Technology Experience",
+                     "description":"What experience does this persona have with technology",
+                     "type":"string"
+                  },
+                  "problems":{
+                     "title":"Problems",
+                     "description":"What problems does this persona encounter",
+                     "type":"string"
+                  },
+                  "needs":{
+                     "title":"Needs",
+                     "description":"What needs does this persona have",
+                     "type":"string"
+                  },
+                  "existingSolutions":{
+                     "title":"Existing Solutions",
+                     "description":"What solutions does this persona currently employ to address their problems and meet their needs",
+                     "type":"string"
+                  }
+               }
+            }
+         },
+         "required":[
+            "name",
+            "id"
+         ]
+      },
+      "perspectives":{
+         "title":"Perspectives",
+         "description":"An array of perspectives to use when evaluating each item.  Each perspective defines a way that the item should be evaluated.  For each perspective, the persona should consider the evaluation from the angle defined by the perspective",
+         "type":"array",
+         "items":[
+            {
+               "title":"Perspective",
+               "description":"An individual perspective form which to consider the evaluation",
+               "type":"object",
+               "properties":{
+                  "id":{
+                     "title":"Perspective ID",
+                     "description":"A string identifying the perspective",
+                     "type":"string"
+                  },
+                  "name":{
+                     "title":"Perspective Name",
+                     "description":"The name of the perspective",
+                     "type":"string"
+                  },
+                  "text":{
+                     "title":"Perspective Text",
+                     "description":"Textual description of the perspective to apply",
+                     "type":"string"
+                  }
+               },
+               "required":[
+                  "id",
+                  "name",
+                  "text"
+               ]
+            }
+         ]
+      },
+      "items":{
+         "title":"Evaluation Items",
+         "description":"An array of items to evaluate.  Each of these represents a set of classifications made by the software system that is being evaluated that must be assessed",
+         "type":"array",
+         "items":[
+            {
+               "title":"Evaluation Item",
+               "description":"An item to evaluate.",
+               "type":"object",
+               "properties":{
+                  "itemId":{
+                     "title":"Item ID",
+                     "description":"The ID of the item being evaluated",
+                     "type":"string"
+                  },
+                  "sent":{
+                     "title":"Sent Date Time",
+                     "description":"The date and time that the item was sent or delivered.  This should be used in any time-based perspective evaluations",
+                     "type":"string",
+                     "format":"date-time"
+                  },
+                  "title":{
+                     "title":"Item Title",
+                     "description":"The title or short description of the item being evalated.  Use this as part of the evaluation of whether the software system correctly classified the item",
+                     "type":[
+                        "string",
+                        "null"
+                     ]
+                  },
+                  "summary":{
+                     "title":"Item Summary",
+                     "description":"Summarised text of the item being evalated.  Use this as part of the evaluation of whether the software system correctly classified the item",
+                     "type":"string"
+                  },
+                  "source":{
+                     "title":"Item Source",
+                     "description":"Description of where the item came from, which will vary according to the type of thing that the item is",
+                     "type":"object",
+                     "properties":{
+                        "type":{
+                           "title":"Item Type",
+                           "description":"Short description of the type of the item being evaluated, such as a Slack message or RSS item.",
+                           "type":[
+                              "string",
+                              "null"
+                           ]
+                        },
+                        "originator":{
+                           "title":"Item Originator",
+                           "description":"Information on who/what the item came from, which will vary by item type.  This could be the sender's email address, an RSS publisher, Slack user etc.",
+                           "type":[
+                              "string",
+                              "null"
+                           ]
+                        },
+                        "channel":{
+                           "title":"Item Channel ",
+                           "description":"Information on how/where the item was distributed, which will vary by item type.  For example, this could be a Slack channel, a mailing list name,or an RSS feed etc.",
+                           "type":[
+                              "string",
+                              "null"
+                           ]
+                        }
+                     },
+                     "required":[
+                        "type",
+                        "originator",
+                        "channel"
+                     ]
+                  },
+                  "classifications":{
+                     "title":"Classifications",
+                     "description":"An array of classifications that the software system has applied to the item.  These are the classifications that should be evaluated for each perspective using the supplied persona",
+                     "type":"array",
+                     "items":[
+                        {
+                           "type":"object",
+                           "properties":{
+                              "name":{
+                                 "title":"Classification Name",
+                                 "description":"The name of the classification.  Do not use this in your evaluation as it is only an identifier",
+                                 "type":"string"
+                              },
+                              "desc":{
+                                 "title":"Classification Description",
+                                 "description":"The description of the classification.  Use this text to understand what type of classification this is and the criteria for selecting different values",
+                                 "type":"string"
+                              },
+                              "selected":{
+                                 "title":"Classification Selection",
+                                 "description":"This is the value that you must evaluate.  It is the classification value that the source system has chosen for the item from the list of available classifications.  Note that a value of 'none', 'not' or null is a special case that does not need to be in the list of available classifications; these would mean that the system decided to classify the item as not being relevant for this classification, which should also be taken into consideration in the evaluation",
+                                 "type":"string"
+                              },
+                              "available":{
+                                 "title":"Available Classifications",
+                                 "description":"The classification values that were available to the system to apply to this classification for this item.  Use this to understand the context of the chosen classification by examining the possible alternatives",
+                                 "type":"array",
+                                 "items":[
+                                    {
+                                       "type":"string"
+                                    }
+                                 ]
+                              }
+                           },
+                           "required":[
+                              "name",
+                              "selected",
+                              "available"
+                           ]
+                        }
+                     ]
+                  }
+               },
+               "required":[
+                  "itemId",
+                  "sent",
+                  "title",
+                  "summary",
+                  "source",
+                  "classifications"
+               ]
+            }
+         ]
+      }
+   },
+   "required":[
+      "persona",
+      "perspectives",
+      "items"
+   ]
+}

@@ -1,0 +1,87 @@
+{
+   "$id":"https://parse.net/awag/0.1/classification-evaluation-result.mode1.schema.json",
+   "$schema":"https://json-schema.org/draft/2020-12/schema",
+   "name":"get_evaluations",
+   "description":"Return a set of evaluations of the provided input data",
+   "parameters":{
+      "type":"object",
+      "properties":{
+         "resultItems":{
+            "type":"array",
+            "items":{
+               "type":"object",
+               "title":"Evaluation results",
+               "description":"Array containing all of the evaluation results for the provided data",
+               "properties":{
+                  "itemId":{
+                     "title":"Item ID",
+                     "description":"The ID of the item being evaluated",
+                     "type":"string"
+                  },
+                  "evaluations":{
+                     "type":"array",
+                     "items":{
+                        "type":"object",
+                        "properties":{
+                           "classificationName":{
+                              "title":"Evaluated Classification Name",
+                              "description":"The name of the classification that this evaluation is for",
+                              "type":"string"
+                           },
+                           "perspectives":{
+                              "title":"Evaluated Perspectives",
+                              "description":"Array containing all of the evaluation results for this item, with one entry per perspective evaluated",
+                              "type":"array",
+                              "items":{
+                                 "type":"object",
+                                 "title":"Evaluated Perspective",
+                                 "description":"The evaluation result for the evaluated classification from a specific perspective",
+                                 "properties":{
+                                    "perspectiveId":{
+                                       "title":"Evaluated Perspective ID",
+                                       "description":"The ID of the perspective that this evaluation is for",
+                                       "type":"string"
+                                    },
+                                    "evaluatedSelection":{
+                                       "title":"Evaluated Classification Selection",
+                                       "description":"The classification selection chosen by the system, that the evaluation has been applied to",
+                                       "type":"string"
+                                    },
+                                    "evaluationLikert":{
+                                       "title":"Evaluation Likert Scale Value",
+                                       "description":"A likert scale ranging from 1 (not at all in agreement with the item evaluated in the perspective) to 5 (absolutely in agreement).  Values must only be in the range 1-5",
+                                       "type":"integer",
+                                       "minimum":1,
+                                       "maximum":5
+                                    },
+                                    "evaluationText":{
+                                       "type":"string",
+                                       "title":"Evaluation Text",
+                                       "description":"Textual description elaborating on why the evaluationLikert value was chosen for this item"
+                                    }
+                                 },
+                                 "required":[
+                                    "perspectiveId",
+                                    "evaluatedSelection",
+                                    "evaluationLikert",
+                                    "evaluationText"
+                                 ]
+                              }
+                           }
+                        },
+                        "required":[
+                           "classificationName",
+                           "perspectives"
+                        ]
+                     }
+                  }
+               },
+               "required":[
+                  "itemId",
+                  "evaluations"
+               ]
+            }
+         }
+      }
+   }
+}

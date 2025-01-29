@@ -1,0 +1,50 @@
+{
+   "$id":"https://parse.net/awag/0.1/simulation-entities.schema.json",
+   "$schema":"https://json-schema.org/draft/2020-12/schema",
+    "title": "Entities Schema",
+    "description": "Schema for representing details of entities that can be referenced in simulated messages.  Entity types can be companies, clubs or organisations and can include their associated people, and other specific information.",
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "name": {
+                "type": "string",
+                "description": "The name of the entity"
+            },
+            "also_known_as": {
+                "type": "array",
+                "description": "Alternate names or abbreviations for the entity",
+                "items": {
+                    "type": "string"
+                }
+            },
+            "type": {
+                "type": "string",
+                "description": "The type of entity, or the relationship it has to the subject (e.g., Client, Competitor)"
+            },
+            "notes": {
+                "type": "string",
+                "description": "Information to use to understand the nature of the entity and how to refer to it in messages"
+            },
+            "people": {
+                "type": "array",
+                "description": "List of people associated with the entity that can be referred to in simulated content",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "description": "Name of the person."
+                        },
+                        "role": {
+                            "type": "string",
+                            "description": "Role of the person within the entity"
+                        }
+                    },
+                    "required": ["name", "role"]
+                }
+            }
+        },
+        "required": ["name", "type", "notes", "people"]
+    }
+}

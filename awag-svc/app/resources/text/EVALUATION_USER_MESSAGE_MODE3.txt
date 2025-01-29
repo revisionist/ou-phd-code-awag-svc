@@ -1,0 +1,3 @@
+Please evaluate the following AwAg Evaluation Request.  You should evaluate each item for the specified persona and perspective, and return the results in the required result schema.  Consider how item has been classified in the context of the persona and perspective.
+
+In this case, rate whether you as your persona AGREE or DISAGREE with the selected evaluation based on the list of available classifications, returning this in the evaluationAgreement property.

@@ -1,0 +1,47 @@
+{
+   "$id":"https://parse.net/awag/0.1/simulation-messages-result.schema.json",
+   "$schema":"https://json-schema.org/draft/2020-12/schema",
+   "name":"get_simulated_messages",
+   "description":"Return a set of simulated text messages based on the provided information",
+   "parameters":{
+      "type":"object",
+      "properties":{
+         "data":{
+            "type":"array",
+            "items":{
+               "type":"object",
+               "title":"Simulation results",
+               "description":"Array containing all of the simulated text messages for the provided data",
+               "properties":{
+                  "category":{
+                     "title":"Category",
+                     "description":"The category ID that was supplied for this set of messages",
+                     "type":"string"
+                  },
+                  "text":{
+                     "title":"Item Text",
+                     "description":"The text content of this message",
+                     "type":"string"
+                  },
+                  "userid":{
+                     "title":"User ID",
+                     "description":"The ID of the simulated user for this message, this should resemble the username",
+                     "type":"string"
+                  },
+                  "username":{
+                     "title":"User Name",
+                     "description":"The name of the simulated user for this message (include both first name and surname)",
+                     "type":"string"
+                  }
+               },
+               "required":[
+                  "category",
+                  "text",
+                  "userid",
+                  "username"
+               ]
+            }
+         }
+      }
+   }
+}

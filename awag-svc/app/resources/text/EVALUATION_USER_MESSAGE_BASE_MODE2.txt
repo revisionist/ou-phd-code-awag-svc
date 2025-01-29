@@ -1,0 +1,1 @@
+Please evaluate the following AwAg Evaluation Request.  You should evaluate each item for the specified persona and perspective, and return the results in the required result schema.  Consider how item has been classified in the context of the persona and perspective.

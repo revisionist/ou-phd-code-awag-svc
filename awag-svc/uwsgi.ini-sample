@@ -1,0 +1,24 @@
+[uwsgi]
+chdir=/path/to/awag-svc
+module = run:app
+#module = run:chunked_app
+master = true
+processes = 4
+threads = 1
+socket = awag-svc.sock
+http-socket = :8008
+chmod-socket = 666
+vacuum = true
+die-on-term = true
+plugins = python3
+enable-threads = true
+virtualenv = ../.venv-awag-svc
+buffer-size = 65536
+#logto = /data/prod/logs/uwsgi/uwsgi.log
+#log-5xx = true
+#log-big = true
+#log-format = %(method) %(uri) %(proto) -> %(status) %(size) bytes, BODY: %(body)
+http-chunked-input = true
+#http-raw-body = true
+#http-auto-chunked = true
+

@@ -1,0 +1,59 @@
+{
+    "percent_of_classification_manual_agrees":{
+        "count_items":"Number of items in the dataset '{tag_main}' having a manual classification record (the numerator in the percentage calculation)",
+        "count_agree":"Number of items in the dataset '{tag_main}' having a manual classification record that agrees with the ML classification (the denominator in the percentage calculation)",
+        "percentage_agree":"Percentage of records in dataset '{tag_main}' having a manual classification, which agrees with the ML classification",
+        "time_series":"The same data, broken down into a per-day time series"
+    },
+    "pearsonr_for_eval_feedback":{
+        "correlation":"The Pearson Correlation Coefficient (r), the measure of the linear correlation between 'evaluation_likert_val' and 'feedback_evaluation_likert_val'.  In this case, the closer this value is to +1, the more the feedback is in agreement with the AI evaluation",
+        "p_value":"The p-value for this correlation",
+        "item_count":"Total number of items in the dataset used to calculate the correlation"
+    },
+    "pointbiserialr_for_eval_agreement":{
+        "correlation":"The Point-Biserial Correlation Coefficient (rpb), the measure of the linear correlation between the binary value 'classification_manual_agrees' and the ordinal value 'evaluation_likert_val'.  In this case, the closer this value is to +1, the more the AI evaluation agrees with the original ML classification",
+        "p_value":"The p-value for this correlation",
+        "item_count":"Total number of items in the dataset used to calculate the correlation"
+    },
+    "pointbiserialr_for_eval_feedback_agreement":{
+        "correlation":"The Point-Biserial Correlation Coefficient (rpb), the measure of the linear correlation between the binary value 'classification_manual_agrees' and the ordinal value 'feedback_evaluation_likert_val'.  In this case, the closer this value is to +1, the more the human feedback on the AI evaluation agrees with the original ML classification.  This statistic should be considered to be a control, because both classification_manual_agrees and feedback_evaluation_likert_val are derived from human input and should be consistent.  However, correlation is likely to be less than 1, because the feedback is given on a scale of values and the original classification agreement is binary",
+        "p_value":"The p-value for this correlation",
+        "item_count":"Total number of items in the dataset used to calculate the correlation"
+    },
+    "avg_and_spread_for_eval_difference":{
+        "average":"The average of the integer value 'feedback_evaluation_difference_int', whch is the difference between the evaluation likert (1-5) awarded by the AI evaluator and that awarded by the human giving feedback.  If in agreement, this value would be 0; the largest value for disagreement is 4 (5 minus 1)",
+        "stddev":"Standard deviation of the data",
+        "median":"Median value of 'feedback_evaluation_difference_int' in this dataset",
+        "mode":"Modal value of 'feedback_evaluation_difference_int' in this dataset",
+        "counts":"The count of the number of each distinct value found in the dataset",
+        "item_count":"Total number of items in the dataset used to calculate the correlation"
+    },
+    "text_stats":{
+        "occurrences":"The number and percentage of times that each distinct value of '{field_name}' occurs in the dataset",
+        "item_count":"Total number of items in this dataset"
+    },
+    "phi_coefficient_for_mode3_agreement":{
+        "phi_coefficient":"The Phi Coefficient (φ), measuring the association between 'classification_manual_agrees' and 'evaluation_agreement_int'. A value closer to ±1 indicates a stronger association.  This is a measure of the quality of the mode3 evaluation - the closer to +1, the, better the evaluation (because it is nearer to the manual classification)",
+        "p_value":"The p-value for the observed association, indicating the significance.",
+        "item_count":"Total number of items used in the association calculation.",
+        "_":"Calculated for main tag '{tag_main}' with evaluation mode3"
+    },
+    "cohens_kappa_for_manual_classification_agreement":{
+        "kappa_score":"Cohen's Kappa (κ), measuring the agreement between the original ML classification and the manual classification from phase 1. A κ of 1 indicates perfect agreement, while a κ less than or equal to 0 indicates no agreement better than chance.",
+        "interpretation":"Values ≤ 0 indicate no agreement, 0.01–0.20 none to slight, 0.21–0.40 fair, 0.41–0.60 moderate, 0.61–0.80 substantial, and 0.81–1.00 almost perfect agreement."
+    },
+    "evaluation_results_likert":{
+        "mean_likert":"The mean value of 'evaluation_likert_val' fopr this data",
+        "stddev":"Standard deviation of mean_likert data",
+        "agreement_percentage":"Percentage of evaluation_likert_val in the data set that are AGREE, where agreement is considered to be evaluation_likert_val 4 or 5",
+        "weighted_agreement_score":"Weighted average of Agreement Score, where evaluation Likert values are assigned a score: 1: 0, 2: 0.25, 3: 0.5, 4: 0.75, 5: 1",
+        "total_count":"Total number of items in data set",
+        "interpretation":"This is the aggregated synthetic evaluation of the ML classification for modes 1 & 2 evaluations, which use a Likert-based evaluation.  An Agreement Score of close to 1 means the ML classifications have been evaluated to be mostly correct, while a score close to 0 means that they have been evaluated as mostly incorrect."
+    },
+    "evaluation_results_mode3":{
+        "agreement_percentage":"Percentage of items in the data set that are AGREE (evaluation_agreement_int = 1)",
+        "weighted_agreement_score":"Weighted average of Agreement Score, based on evaluation_agreement_int",
+        "total_count":"Total number of items in data set",
+        "interpretation":"This is the aggregated synthetic evaluation of the ML classification for mode 3 evaluations, which use an Agree/Disagree-based evaluation.  An Agreement Score of close to 1 means the ML classifications have been evaluated to be mostly correct, while a score close to 0 means that they have been evaluated as mostly incorrect."
+    }
+}

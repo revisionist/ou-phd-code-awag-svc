@@ -30,5 +30,25 @@ Temporary Items
 
 
 # Windows files...
-
 desktop.ini
+
+
+# Environments
+.env
+.venv
+.venv-*
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+
+# Misc files
+
+log
+database.db
+
+uwsgi.ini
+*.sock
+
